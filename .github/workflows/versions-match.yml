@@ -14,14 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
+      - name: Set up Bun
+        uses: antongolub/action-setup-bun@v1.13.1
         with:
-          node-version: 18.x
-          cache: "npm"
+          bun-version: 1.0.2
+          cache: true
 
-      - name: Install Dependencies
-        run: npm ci
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
 
       - name: Check versions Match
-        run: npm run release
+        run: bun ./scripts/release.ts

@@ -4,8 +4,6 @@ Validator middleware using [Superstruct](https://docs.superstructjs.org) for [Ho
 
 You can write a schema with Superstruct and validate the incoming values.
 
-> This project is currently in development. There is currently nothing here.
-
 ## Usage
 
 ```ts

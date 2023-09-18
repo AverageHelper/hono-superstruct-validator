@@ -1,7 +1,7 @@
 #!/usr/bin/env ts-node
 
 /**
- * Asserts (on import) that the running context is ts-node.
+ * Asserts (on import) that the running context is ts-node or Bun.
  *
  * @throws an {@link EvalError} if the `ts-node` Service instance is not found on the process.
  *
@@ -21,7 +21,7 @@ declare global {
 	}
 }
 
-let detectTSNode = false;
+let detectTSNode = "Bun" in globalThis;
 
 try {
 	if (process[REGISTER_INSTANCE]) {
