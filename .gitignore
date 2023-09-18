@@ -11,12 +11,8 @@ logs
 node_modules
 
 # Generated files
-db
-db-test
 dist
-lib
 ./config
 coverage
-src/version.ts
 tmp
 temp
