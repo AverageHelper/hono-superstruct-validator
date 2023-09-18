@@ -1,7 +1,7 @@
 {
-	"name": "NODE_PROJECT_TEMPLATE",
+	"name": "hono-superstruct-validator",
 	"version": "1.0.0",
-	"description": "Boilerplate for a NodeJS project in strict TypeScript.",
+	"description": "Validator middleware using Superstruct.",
 	"scripts": {
 		"prebuild": "npm run export-version && npm run lint",
 		"build": "./node_modules/.bin/tsc -p tsconfig.prod.json",
@@ -15,17 +15,17 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/AverageHelper/NODE_PROJECT_TEMPLATE.git"
+		"url": "git+https://github.com/AverageHelper/hono-superstruct-validator.git"
 	},
 	"keywords": [
 		"node"
 	],
 	"author": "Average Helper",
-	"license": "GPL-3.0",
+	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/AverageHelper/NODE_PROJECT_TEMPLATE/issues"
+		"url": "https://github.com/AverageHelper/hono-superstruct-validator/issues"
 	},
-	"homepage": "https://github.com/AverageHelper/NODE_PROJECT_TEMPLATE#readme",
+	"homepage": "https://github.com/AverageHelper/hono-superstruct-validator#readme",
 	"type": "module",
 	"main": "./lib/main.js",
 	"files": [
