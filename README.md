@@ -26,23 +26,35 @@ app.post("/author", sValidator("json", schema), c => {
 });
 ```
 
-Hook:
+By default, if the incoming data does not match the given schema, a JSON object will be returned to the caller, with a status of 400. The response will have the following interface:
+
+```ts
+interface ResponseBody {
+	message: string;
+}
+```
+
+The message will, by default, be the `message` property of the relevant `StructError`.
+
+If you wish to handle errors differently, you may include a callback function:
 
 ```ts
 app.post(
 	"/post",
 	sValidator("json", schema, (result, c) => {
-		if (!result.success) {
-			return c.text("Invalid!", 400);
-		}
+		return c.text("Invalid!", 400);
 	})
 	//...
 );
 ```
 
+At the moment, there is no opportunity to recover from the error. If the input data is bad, the middleware _will_ fail out and respond to the caller.
+
 ## Author
 
 Average Helper <https://github.com/AverageHelper>
+
+Much of this work is based on [Yusuke Wada](https://github.com/yusukebe)'s wonderful work on [`@hono/zod-validator`](https://github.com/honojs/middleware/tree/main/packages/zod-validator).
 
 ## License
 
