@@ -57,7 +57,6 @@
 		"@typescript-eslint/array-type": ["warn", { "default": "generic" }],
 		"@typescript-eslint/dot-notation": "off",
 		"@typescript-eslint/consistent-type-imports": "warn",
-		"new-cap": "off", // Many decorators do not follow normal function conventions
 		"unicorn/catch-error-name": ["warn", { "name": "error" }]
 	},
 
@@ -80,16 +79,6 @@
 			"rules": {
 				"prettier/prettier": "warn",
 				"max-nested-callbacks": "off" // Unit tests involve a lot of nested callbacks
-			}
-		},
-		{
-			"files": ["*.js"],
-			"parser": "null"
-		},
-		{
-			"files": ["database/migrations/*.ts"],
-			"rules": {
-				"unicorn/filename-case": "off"
 			}
 		}
 	]

@@ -7,7 +7,7 @@
 		"allowSyntheticDefaultImports": true,
 		"allowJs": false,
 		"declaration": true,
-		"removeComments": true,
+		"removeComments": false,
 		"sourceMap": true,
 		"outDir": "./dist",
 		"isolatedModules": true,
@@ -17,8 +17,6 @@
 		"noPropertyAccessFromIndexSignature": true,
 		"useUnknownInCatchVariables": true,
 		"noUncheckedIndexedAccess": true,
-		"typeRoots": ["./node_modules/@types", "./src"],
-		"types": ["node"],
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true
