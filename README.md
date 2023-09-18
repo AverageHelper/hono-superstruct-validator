@@ -54,6 +54,8 @@ At the moment, there is no opportunity to recover from the error. If the input d
 
 Average Helper <https://github.com/AverageHelper>
 
+Much of this work is based on [Yusuke Wada](https://github.com/yusukebe)'s wonderful work on [`@hono/zod-validator`](https://github.com/honojs/middleware/tree/main/packages/zod-validator).
+
 ## License
 
 MIT
