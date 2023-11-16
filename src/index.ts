@@ -50,7 +50,7 @@ export const sValidator = <
 	validator<unknown, Path, string, Target, Infer<T>, string, V, E>(
 		target,
 		(value, context): Infer<T> | globalThis.Response | Promise<globalThis.Response> => {
-			const [error, data] = validate<Infer<T>, T>(value, struct);
+			const [error, data] = validate<Infer<T>, T>(value, struct, { coerce: true });
 
 			if (error) {
 				if (onError) {
