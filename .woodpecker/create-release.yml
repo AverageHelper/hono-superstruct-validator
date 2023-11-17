@@ -61,18 +61,14 @@ steps:
 
       # Log what we're about to send
       - echo $RELEASE_PAYLOAD | jq
-      # - echo
-
-      # Prepare payload string
-      # - export RELEASE_BODY=$(echo $RELEASE_PAYLOAD | jq -c '(.|tojson)')
       - echo Preparing to send $RELEASE_PAYLOAD
       - echo
 
       # See if release exists
-      - export RELEASE_ID=$(curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
+      - export RELEASE_ID=$(curl -f "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
       - echo Release ID for tag "$TAG" is $RELEASE_ID
       - echo
 
       # Do release if not exists
-      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_PAYLOAD" -i; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
+      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl -if "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_PAYLOAD" -i; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
     secrets: [codeberg_access_token]
