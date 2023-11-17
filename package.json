@@ -1,6 +1,6 @@
 {
 	"name": "hono-superstruct-validator",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Validator middleware using Superstruct.",
 	"private": false,
 	"scripts": {
@@ -12,11 +12,12 @@
 		"lint": "./node_modules/.bin/eslint . --ext .ts",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix",
 		"release": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/release.ts",
+		"create-release-env": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/createReleaseEnv.ts",
 		"prepublishOnly": "npm run build && npm run release && npm test && npm run release"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/AverageHelper/hono-superstruct-validator.git"
+		"url": "git+https://codeberg.org/AverageHelper/hono-superstruct-validator.git"
 	},
 	"keywords": [
 		"node"
@@ -24,9 +25,9 @@
 	"author": "Average Helper",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/AverageHelper/hono-superstruct-validator/issues"
+		"url": "https://codeberg.org/AverageHelper/hono-superstruct-validator/issues"
 	},
-	"homepage": "https://github.com/AverageHelper/hono-superstruct-validator#readme",
+	"homepage": "https://codeberg.org/AverageHelper/hono-superstruct-validator#readme",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -45,7 +46,7 @@
 		"@typescript-eslint/eslint-plugin": "6.7.2",
 		"@typescript-eslint/parser": "6.7.2",
 		"@vitest/coverage-istanbul": "0.34.3",
-		"eslint": "8.49.0",
+		"eslint": "8.53.0",
 		"eslint-config-prettier": "9.0.0",
 		"eslint-config-strictest": "0.8.1",
 		"eslint-plugin-deprecation": "2.0.0",
@@ -57,14 +58,14 @@
 		"eslint-plugin-unicorn": "48.0.1",
 		"eslint-plugin-vitest": "0.3.1",
 		"hono": "3.6.3",
-		"keep-a-changelog": "2.3.0",
+		"keep-a-changelog": "2.5.2",
 		"nodemon": "3.0.1",
 		"prettier": "3.0.3",
 		"semver": "7.5.4",
 		"superstruct": "1.0.3",
 		"ts-node": "10.9.1",
 		"typescript": "5.2.2",
-		"undici": "5.24.0",
+		"undici-types": "5.27.2",
 		"vitest": "0.34.3"
 	}
 }

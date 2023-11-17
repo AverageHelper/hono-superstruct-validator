@@ -1,0 +1,27 @@
+# When a new tag is made, cut a new release
+
+when:
+  - event: tag
+    ref: refs/tags/v*
+
+steps:
+  changelog:
+    name: Parse Changelog
+    image: node:18
+    commands:
+      - npm ci
+      - npm run create-release-env # Saves details to local `.release.env` file
+
+  release:
+    name: Create Release
+    # Won't overwrite the release if it already exists
+    image: woodpeckerci/plugin-gitea-release
+    settings:
+      env-file: .release.env # Created in previous step
+      base_url: https://codeberg.org
+      api_key:
+        from_secret: codeberg_access_token
+      target: main
+      title: v${NEW_RELEASE_VERSION}
+      note: ${NEW_RELEASE_DESCRIPTION}
+      prerelease: ${NEW_RELEASE_PRERELEASE}
