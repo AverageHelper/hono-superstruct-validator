@@ -44,9 +44,11 @@ steps:
       # Prepare env vars, from file created in previous step
       - while read line; do export "$line"; done < .release.env
       - export TAG="v$NEW_RELEASE_VERSION"
+      # FIXME: We only wanna trim leading and trailing quotes. This does all:
+      - export RELEASE_DESCRIPTION=$(jq -nr 'env | .NEW_RELEASE_DESCRIPTION' | tr -d '"')
       - >
         export RELEASE_PAYLOAD=$(jq -cn \
-          --arg b $NEW_RELEASE_DESCRIPTION \
+          --arg b "$RELEASE_DESCRIPTION" \
           --arg d false \
           --arg n "$TAG" \
           --arg p "$NEW_RELEASE_PRERELEASE" \
