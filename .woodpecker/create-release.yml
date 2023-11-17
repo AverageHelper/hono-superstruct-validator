@@ -46,7 +46,7 @@ steps:
       - export TAG="v$NEW_RELEASE_VERSION"
       - >
         export RELEASE_PAYLOAD=$(jq -cn \
-          --arg b "$NEW_RELEASE_DESCRIPTION" \
+          --arg b $NEW_RELEASE_DESCRIPTION \
           --arg d false \
           --arg n "$TAG" \
           --arg p "$NEW_RELEASE_PRERELEASE" \
