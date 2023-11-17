@@ -35,7 +35,7 @@ steps:
 
   release:
     name: Create Release
-    image: ghcr.io/jqlang/jq:1.7
+    image: backplane/jq
     commands:
       # Prepare env vars, from file created in previous step
       - while read line; do export "$line"; done < .release.env
@@ -50,11 +50,11 @@ steps:
           '{ body: $b, draft: $d, name: $n, prerelease: $p, target_commitish: $t }')
 
       # Prepare release values
-      - export RELEASE_BODY=$(echo $RELEASE_PAYLOAD | jq -c '(.|tostring)')
+      - export RELEASE_BODY=$(echo $RELEASE_PAYLOAD | jq -c '(.|tojson)')
 
       # See if release exists
       - export RELEASE_ID=$(curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
 
       # Do release if not exists
-      - '[ "$RELEASE_ID" == "null" ] && echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d $RELEASE_BODY'
+      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_BODY" -i; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
     secrets: [codeberg_access_token]
