@@ -55,11 +55,12 @@ const remoteRelease = await remoteReleaseRes.json();
 
 if (remoteReleaseRes.status !== 404) {
 	// Release exists! Stop here.
-	logger.info("Release exists on remote:", remoteRelease);
+	logger.info("Release already exists on remote:", remoteRelease);
 	process.exit(0);
 }
 
 // Release doesn't exist! Create it.
+logger.info("Release doesn't yet exist on remote. Creating it...");
 
 const isPrerelease: boolean =
 	thisRelease.parsedVersion.prerelease.length > 0 || thisRelease.parsedVersion.major === 0;
