@@ -47,6 +47,7 @@ if (!thisRelease?.parsedVersion || !thisRelease.version)
 // Handy info
 const tag: string = `v${thisRelease.version}`;
 logger.info("latest version:", tag);
+logger.info("version metadata:", thisRelease);
 
 // See https://codeberg.org/api/swagger#/repository/repoCreateRelease
 // GET /repos/{owner}/{repo}/releases/tags/{tag}
@@ -117,7 +118,7 @@ const result = await fetch(repoReleases, {
 		"Content-Type": "application/json"
 	},
 	body: JSON.stringify({
-		body: description,
+		body: description.trim(),
 		draft: false,
 		name: tag,
 		prerelease: isPrerelease,
