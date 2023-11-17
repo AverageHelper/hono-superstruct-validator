@@ -24,3 +24,4 @@ jobs:
         run: |
           gh pr close ${{ env.PR }} --comment "(Automated close) Please do not file pull requests here. [File on Codeberg](https://codeberg.org/AverageHelper/hono-superstruct-validator) instead."
           gh pr lock ${{ env.PR }}
+
