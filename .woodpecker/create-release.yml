@@ -6,69 +6,11 @@ when:
   - event: push
     branch: main
 
-clone:
-  git:
-    image: woodpeckerci/plugin-git
-    settings:
-      tags: true
-
 steps:
   changelog:
-    name: Parse Changelog
+    name: Create Tag and Release
     image: node:18
     commands:
       - npm ci
-      - npm run create-release-env # Saves details to local `.release.env` file
-
-  tag:
-    name: Create Tag
-    image: alpine/git
-    commands:
-      # Prepare env vars, from file created in previous step
-      - while read line; do export "$line"; done < .release.env
-      - export GIT_CREDENTIALS="$CODEBERG_USERNAME:$CODEBERG_ACCESS_TOKEN"
-      - export TAG="v$NEW_RELEASE_VERSION"
-
-      # Tag if not exists
-      - if git show-ref --tags $TAG --quiet; then echo tag "$TAG" exists; else git tag "$TAG" && git push https://$GIT_CREDENTIALS@codeberg.org/$CI_REPO.git HEAD:main "$TAG"; fi
-    secrets: [codeberg_username, codeberg_access_token]
-
-  release:
-    name: Create Release
-    image: alpine:3
-    commands:
-      # Install jq and curl
-      - apk update
-      - apk add --no-cache curl jq
-
-      # Prepare env vars, from file created in previous step
-      - while read line; do export "$line"; done < .release.env
-      - export TAG="v$NEW_RELEASE_VERSION"
-
-      # Strip extra quotes from description
-      # FIXME: We only wanna trim leading and trailing quotes. This does all:
-      - export RELEASE_DESCRIPTION=$(jq -nr 'env | .NEW_RELEASE_DESCRIPTION' | tr -d '"')
-
-      # Construct payload object
-      - >
-        export RELEASE_PAYLOAD=$(jq -cn \
-          --arg b "$RELEASE_DESCRIPTION" \
-          --argjson d false \
-          --arg n "$TAG" \
-          --arg p "$NEW_RELEASE_PRERELEASE" \
-          --arg t "main" \
-          '{ body: $b, draft: $d, name: $n, prerelease: $p, target_commitish: $t }')
-
-      # Log what we're about to send
-      - echo $RELEASE_PAYLOAD | jq
-      - echo Preparing to send $RELEASE_PAYLOAD
-      - echo
-
-      # See if release exists
-      - export RELEASE_ID=$(curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
-      - echo Release ID for tag "$TAG" is $RELEASE_ID
-      - echo
-
-      # Do release if not exists
-      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_PAYLOAD" -if; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
+      - npm run create-release # Creates tag and release
     secrets: [codeberg_access_token]

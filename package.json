@@ -12,7 +12,7 @@
 		"lint": "./node_modules/.bin/eslint . --ext .ts",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix",
 		"release": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/release.ts",
-		"create-release-env": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/createReleaseEnv.ts",
+		"create-release": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/createRelease.ts",
 		"prepublishOnly": "npm run build && npm run release && npm test && npm run release"
 	},
 	"repository": {

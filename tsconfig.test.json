@@ -2,7 +2,7 @@
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
 		"noEmit": true,
-		"types": ["vitest/globals"]
+		"types": ["vitest/globals", "./src/@types/fetch"]
 	},
 	"include": ["./*.ts", "scripts/**/*.ts", "src/**/*.ts", "tests/**/*.ts", "src/**/*.json"]
 }
