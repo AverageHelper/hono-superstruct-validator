@@ -44,8 +44,12 @@ steps:
       # Prepare env vars, from file created in previous step
       - while read line; do export "$line"; done < .release.env
       - export TAG="v$NEW_RELEASE_VERSION"
+
+      # Strip extra quotes from description
       # FIXME: We only wanna trim leading and trailing quotes. This does all:
       - export RELEASE_DESCRIPTION=$(jq -nr 'env | .NEW_RELEASE_DESCRIPTION' | tr -d '"')
+
+      # Construct payload object
       - >
         export RELEASE_PAYLOAD=$(jq -cn \
           --arg b "$RELEASE_DESCRIPTION" \
@@ -57,11 +61,11 @@ steps:
 
       # Log what we're about to send
       - echo $RELEASE_PAYLOAD | jq
-      - echo
+      # - echo
 
-      # Prepare release values
-      - export RELEASE_BODY=$(echo $RELEASE_PAYLOAD | jq -c '(.|tojson)')
-      - echo Preparing to send $RELEASE_BODY
+      # Prepare payload string
+      # - export RELEASE_BODY=$(echo $RELEASE_PAYLOAD | jq -c '(.|tojson)')
+      - echo Preparing to send $RELEASE_PAYLOAD
       - echo
 
       # See if release exists
@@ -70,5 +74,5 @@ steps:
       - echo
 
       # Do release if not exists
-      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_BODY" -i; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
+      - 'if [ "$RELEASE_ID" == "null" ]; then echo "Creating release $TAG" && curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases" -H "accept: application/json" -H "Authorization: token $CODEBERG_ACCESS_TOKEN" -H "Content-Type: application/json" -d "$RELEASE_PAYLOAD" -i; else echo "Release $TAG already exists with ID $RELEASE_ID"; fi'
     secrets: [codeberg_access_token]
