@@ -8,6 +8,9 @@ on:
     types: [opened, reopened]
 
 permissions:
+  contents: read
+  discussions: write
+  issues: write
   pull-requests: write
 
 jobs:
