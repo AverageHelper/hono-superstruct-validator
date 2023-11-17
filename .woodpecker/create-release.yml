@@ -53,10 +53,10 @@ steps:
       - >
         export RELEASE_PAYLOAD=$(jq -cn \
           --arg b "$RELEASE_DESCRIPTION" \
-          --arg d false \
+          --argjson d false \
           --arg n "$TAG" \
           --arg p "$NEW_RELEASE_PRERELEASE" \
-          --arg t main \
+          --arg t "main" \
           '{ body: $b, draft: $d, name: $n, prerelease: $p, target_commitish: $t }')
 
       # Log what we're about to send
