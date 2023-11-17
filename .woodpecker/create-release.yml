@@ -65,7 +65,7 @@ steps:
       - echo
 
       # See if release exists
-      - export RELEASE_ID=$(curl -f "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
+      - export RELEASE_ID=$(curl "https://codeberg.org/api/v1/repos/$CI_REPO/releases/tags/$TAG" | jq .id)
       - echo Release ID for tag "$TAG" is $RELEASE_ID
       - echo
 
