@@ -7,11 +7,7 @@ on:
   pull_request_target:
     types: [opened, reopened]
 
-permissions:
-  contents: read
-  discussions: write
-  issues: write
-  pull-requests: write
+permissions: write-all
 
 jobs:
   run:
