@@ -11,13 +11,13 @@ steps:
     commands:
       - npm ci
       - npm run create-release-env # Saves details to local `.release.env` file
-      - while read line; do export "$line"; done < .release.env # Read the file in
 
   release:
     name: Create Release
     # Won't overwrite the release if it already exists
     image: woodpeckerci/plugin-gitea-release
     settings:
+      env-file: ../.release.env # Created in previous step
       base_url: https://codeberg.org
       api_key:
         from_secret: codeberg_access_token
