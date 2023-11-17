@@ -35,8 +35,12 @@ steps:
 
   release:
     name: Create Release
-    image: backplane/jq
+    image: alpine:3
     commands:
+      # Install jq and curl
+      - apk update
+      - apk add --no-cache curl jq
+
       # Prepare env vars, from file created in previous step
       - while read line; do export "$line"; done < .release.env
       - export TAG="v$NEW_RELEASE_VERSION"
