@@ -11,13 +11,13 @@
 		"test:watch": "./node_modules/.bin/vitest watch --coverage=false",
 		"lint": "./node_modules/.bin/eslint . --ext .ts",
 		"lint:fix": "./node_modules/.bin/eslint . --ext .ts --fix",
-		"release": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/release.ts",
-		"create-release": "./node_modules/.bin/ts-node --esm -P tsconfig.test.json ./scripts/createRelease.ts",
+		"release": "./node_modules/.bin/tsx --tsconfig tsconfig.test.json scripts/release.ts",
+		"create-release": "./node_modules/.bin/tsx --tsconfig tsconfig.test.json scripts/createRelease.ts",
 		"prepublishOnly": "npm run build && npm run release && npm test && npm run release"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://codeberg.org/AverageHelper/hono-superstruct-validator.git"
+		"url": "git+https://git.average.name/AverageHelper/hono-superstruct-validator.git"
 	},
 	"keywords": [
 		"node"
@@ -25,9 +25,9 @@
 	"author": "Average Helper",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://codeberg.org/AverageHelper/hono-superstruct-validator/issues"
+		"url": "https://git.average.name/AverageHelper/hono-superstruct-validator/issues"
 	},
-	"homepage": "https://codeberg.org/AverageHelper/hono-superstruct-validator#readme",
+	"homepage": "https://git.average.name/AverageHelper/hono-superstruct-validator#readme",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -63,7 +63,7 @@
 		"prettier": "3.0.3",
 		"semver": "7.5.4",
 		"superstruct": "1.0.3",
-		"ts-node": "10.9.1",
+		"tsx": "4.6.2",
 		"typescript": "5.2.2",
 		"undici-types": "5.27.2",
 		"vitest": "0.34.3"

@@ -50,10 +50,14 @@ At the moment, there is no opportunity to recover from the error. If the input d
 
 ## Author
 
-Average Helper <https://codeberg.org/AverageHelper>
+Average Helper <https://git.average.name/AverageHelper>
 
 Much of this work is based on [Yusuke Wada](https://github.com/yusukebe)'s wonderful work on [`@hono/zod-validator`](https://github.com/honojs/middleware/tree/main/packages/zod-validator).
 
 ## License
 
 MIT
+
+## Contributing
+
+This project lives primarily at [git.average.name](https://git.average.name/AverageHelper/hono-superstruct-validator). Read-only mirrors also exist on [Codeberg](https://codeberg.org/AverageHelper/hono-superstruct-validator) and [GitHub](https://github.com/AverageHelper/hono-superstruct-validator). Issues or pull requests should be filed at [git.average.name](https://git.average.name/AverageHelper/hono-superstruct-validator). You may sign in or create an account directly, or use one of several OAuth 2.0 providers.
