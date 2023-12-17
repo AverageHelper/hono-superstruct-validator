@@ -14,5 +14,8 @@
 		"coverage.xml",
 		"jacoco.xml",
 		"coverage.cobertura.xml"
-	]
+	],
+	"yaml.schemas": {
+		"https://json.schemastore.org/github-workflow.json": "**/workflows/*.yml"
+	}
 }

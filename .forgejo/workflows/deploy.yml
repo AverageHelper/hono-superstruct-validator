@@ -1,4 +1,4 @@
-# On push to main, if the latest version in CHANGELOG.md is different from the latest version tag, create a new tag, and create a new release.
+# On push to main, if the latest version in CHANGELOG.md is different from the latest version tag, create a new tag, create a new release, and publish to NPM.
 
 on:
   push:
@@ -24,3 +24,8 @@ jobs:
         run: npm run create-release # Creates tag and release
         env:
           FORGEJO_ACCESS_TOKEN: ${{ secrets.FORGEJO_ACCESS_TOKEN }}
+
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
