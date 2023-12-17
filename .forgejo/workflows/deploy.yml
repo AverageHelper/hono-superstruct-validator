@@ -16,9 +16,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          registry-url: "https://registry.npmjs.org"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install Dependencies
         run: npm ci
@@ -29,6 +26,6 @@ jobs:
           FORGEJO_ACCESS_TOKEN: ${{ secrets.FORGEJO_ACCESS_TOKEN }}
 
       - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        uses: https://github.com/JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
